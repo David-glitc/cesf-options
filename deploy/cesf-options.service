@@ -1,0 +1,17 @@
+[Unit]
+Description=CESF options paper dashboard (cesfoptions.kierkegaard.space)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=david
+WorkingDirectory=/home/david/CESF/problems/options-predictor
+ExecStart=/usr/bin/python3 live_server.py --ticker SPY --port 8766 --paths 48 --days 520
+Restart=always
+RestartSec=5
+StandardOutput=append:/tmp/cesf-options.log
+StandardError=append:/tmp/cesf-options.log
+
+[Install]
+WantedBy=multi-user.target

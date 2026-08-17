@@ -1,0 +1,12 @@
+microgpt
+microgpt-c/microgpt
+microgpt-c/.git
+__pycache__/
+*.pyc
+.venv/
+data/*.jsonl
+data/bench.json
+data/executions.jsonl
+data/options_corpus.txt
+cesf/__pycache__/
+

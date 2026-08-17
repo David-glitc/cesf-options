@@ -1,0 +1,21 @@
+http:
+  routers:
+    cesfoptions-http:
+      middlewares:
+        - redirect-to-https@file
+      entryPoints:
+        - http
+      service: cesfoptions
+      rule: Host(`cesfoptions.kierkegaard.space`)
+    cesfoptions-https:
+      entryPoints:
+        - https
+      service: cesfoptions
+      rule: Host(`cesfoptions.kierkegaard.space`)
+      tls:
+        certresolver: letsencrypt
+  services:
+    cesfoptions:
+      loadBalancer:
+        servers:
+          - url: "http://cesf-options:8766"

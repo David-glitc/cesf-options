@@ -1,0 +1,32 @@
+services:
+  cesfoptions:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: cesf-options:local
+    container_name: cesf-options
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - /home/david/CESF/problems/options-predictor:/app
+      - /home/david/CESF:/home/david/CESF:ro
+    environment:
+      PYTHONPATH: /app
+    networks:
+      - coolify
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=coolify
+      - traefik.http.middlewares.cesfoptions-https.redirectscheme.scheme=https
+      - traefik.http.routers.cesfoptions-http.rule=Host(`cesfoptions.kierkegaard.space`)
+      - traefik.http.routers.cesfoptions-http.entrypoints=http
+      - traefik.http.routers.cesfoptions-http.middlewares=cesfoptions-https
+      - traefik.http.routers.cesfoptions.rule=Host(`cesfoptions.kierkegaard.space`)
+      - traefik.http.routers.cesfoptions.entrypoints=https
+      - traefik.http.routers.cesfoptions.tls=true
+      - traefik.http.routers.cesfoptions.tls.certresolver=letsencrypt
+      - traefik.http.services.cesfoptions.loadbalancer.server.port=8766
+
+networks:
+  coolify:
+    external: true
