@@ -4,6 +4,8 @@ Paper put-write dashboard: CESF vs a raw Monte Carlo control, with [microgpt-c](
 
 **Live:** [https://cesfoptions.kierkegaard.space](https://cesfoptions.kierkegaard.space)
 
+**Code:** [github.com/David-glitc/cesf-options](https://github.com/David-glitc/cesf-options)
+
 ## What trains in C
 
 The GPT is [vixhal-baraiya/microgpt-c](https://github.com/vixhal-baraiya/microgpt-c): one C file (`microgpt-c/src/microgpt.c`), libc only, Adam + sampling. This tree compiles it with `-DBLOCK_SIZE=48` and small CLI flags (`--prefix`, `--steps`, `--no-bench`). Python never trains the transformer. Python only builds CESF teacher labels and serves the paper dashboard.
